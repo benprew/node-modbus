@@ -69,7 +69,7 @@ module.exports = stampit()
 
       var current = fifo.shift()
 
-      this.onData(current.pdu, function (response) {
+      this.onData(current, function (response) {
         this.log.debug('sending tcp data')
 
         var head = Buffer.allocUnsafe(7)

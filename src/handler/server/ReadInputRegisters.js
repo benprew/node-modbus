@@ -14,7 +14,8 @@ module.exports = stampit()
       this.setRequestHandler(4, onRequest)
     }.bind(this)
 
-    var onRequest = function (pdu, cb) {
+    var onRequest = function (request, cb) {
+      var pdu = request.pdu;
       setTimeout(function () {
         this.log.debug('handling read input registers request.')
 
@@ -31,7 +32,7 @@ module.exports = stampit()
         var byteStart = start * 2
         var quantity = pdu.readUInt16BE(3)
 
-        this.emit('readInputRegistersRequest', byteStart, quantity)
+        this.emit('readInputRegistersRequest', request, byteStart, quantity)
 
         var mem = this.getInput()
 

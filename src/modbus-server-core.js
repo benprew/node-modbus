@@ -32,9 +32,9 @@ var core = stampit()
       }
     }.bind(this)
 
-    this.onData = function (pdu, callback) {
+    this.onData = function (request, callback) {
       // get fc and byteCount in advance
-      var fc = pdu.readUInt8(0)
+      var fc = request.pdu.readUInt8(0)
 
       // get the pdu handler
       var reqHandler = handler[fc]
@@ -55,7 +55,7 @@ var core = stampit()
         return
       }
 
-      reqHandler(pdu, function (response) {
+      reqHandler(request, function (response) {
         callback(response)
       })
     }.bind(this)
